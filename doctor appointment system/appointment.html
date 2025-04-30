@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Appointment | Royal HealthCare Multispeciality Hospital</title>
+  <link rel="stylesheet" href="css1style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-hospital-symbol"></i> Royal HealthCare
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="doctors.html">Doctors</a></li>
+      <li><a href="health-packages.html">Health Packages</a></li>
+      <li><a href="appointment.html">Book Appointment</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="booked_appointments.html">Booked Appointments</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <img src="https://static.vecteezy.com/system/resources/previews/016/699/936/original/book-doctor-appointment-online-flat-banner-template-making-visit-poster-leaflet-printable-color-designs-editable-flyer-page-with-text-space-vector.jpg">
+  <header class="hero">
+    <h1>Book an Appointment</h1>
+    <p>Get the Best Care from Our Expert Doctors</p>
+  </header>
+
+  <!-- Appointment Form Section -->
+  <section class="appointment-form">
+    <h2>Fill out the form to book your appointment</h2>
+    <form id="appointmentForm">
+      <div class="form-group">
+        <label for="patientName">Full Name</label>
+        <input type="text" id="patientName" name="patientName" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+      </div>
+      <div class="form-group">
+        <label for="doctorSelect">Select Doctor</label>
+        <select id="doctorSelect" name="doctorSelect" required>
+          <option value="Rajesh Sharma">Dr. Rajesh Sharma - Cardiologist</option>
+          <option value="Neha Gupta">Dr. Neha Gupta - Neurologist</option>
+          <option value="Arvind Kumar">Dr. Arvind Kumar - Orthopedic</option>
+          <option value="Priya Sharma">Dr. Priya Sharma - Dermatologist</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="appointmentTime">Preferred Appointment Time</label>
+        <select id="appointmentTime" name="appointmentTime" required>
+          <!-- Time slots will be populated here based on doctor selection -->
+        </select>
+      </div>
+      <button type="submit" class="btn">Book Appointment</button>
+    </form>
+
+    <!-- Confirmation message -->
+    <div id="confirmationMessage" class="confirmation-message" style="display: none;">
+      <p>Thank you for booking an appointment! We will contact you shortly.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Royal HealthCare Multispeciality Hospital</p>
+    <p>Emergency Helpline: <a href="tel:+911234567890">+91 12345 67890</a></p>
+  </footer>
+
+  <script>
+    // Define the available time slots for each doctor
+    const doctorTimeSlots = {
+      "Rajesh Sharma": [
+        "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", 
+        "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM"
+      ],
+      "Neha Gupta": [
+        "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", 
+        "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM"
+      ],
+      "Arvind Kumar": [
+        "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", 
+        "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM"
+      ],
+      "Priya Sharma": [
+        "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", 
+        "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM"
+      ]
+    };
+
+    // Get existing appointments from localStorage (if any)
+    function loadAppointments() {
+      return JSON.parse(localStorage.getItem("appointments")) || [];
+    }
+
+    // Save appointments back to localStorage
+    function saveAppointments(appointments) {
+      localStorage.setItem("appointments", JSON.stringify(appointments));
+    }
+
+    // When doctor is selected, update the available time slots
+    document.getElementById("doctorSelect").addEventListener("change", function() {
+      const doctor = this.value;
+      const timeSelect = document.getElementById("appointmentTime");
+
+      // Clear existing options
+      timeSelect.innerHTML = "";
+
+      // Get the available time slots for the selected doctor
+      const timeSlots = doctorTimeSlots[doctor];
+      let bookedAppointments = loadAppointments();
+
+      // Filter out time slots that have already been booked
+      const bookedSlots = bookedAppointments.filter(appointment => appointment.doctorSelect === doctor)
+                                             .map(appointment => appointment.appointmentTime);
+
+      // Add the available time slots to the dropdown (exclude booked slots)
+      timeSlots.forEach(function(time) {
+        if (!bookedSlots.includes(time)) {
+          const option = document.createElement("option");
+          option.value = time;
+          option.textContent = time;
+          timeSelect.appendChild(option);
+        }
+      });
+    });
+
+    // Initial population of time slots when page loads
+    document.getElementById("doctorSelect").dispatchEvent(new Event("change"));
+
+    // Handle form submission
+    document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent default form submission
+
+      // Get form values
+      const patientName = document.getElementById("patientName").value;
+      const phoneNumber = document.getElementById("phoneNumber").value;
+      const doctorSelect = document.getElementById("doctorSelect").value;
+      const appointmentTime = document.getElementById("appointmentTime").value;
+
+      // Check if the selected time is already booked
+      let appointments = loadAppointments();
+      const isSlotBooked = appointments.some(appointment => 
+        appointment.doctorSelect === doctorSelect && appointment.appointmentTime === appointmentTime
+      );
+
+      if (isSlotBooked) {
+        alert("The selected time slot is already booked. Please choose another time.");
+        return; // Stop the form submission if the slot is already booked
+      }
+
+      // Create an appointment object
+      const appointment = {
+        patientName,
+        phoneNumber,
+        doctorSelect,
+        appointmentTime
+      };
+
+      // Add the new appointment to the array
+      appointments.push(appointment);
+
+      // Save back to localStorage
+      saveAppointments(appointments);
+
+      // Show confirmation message
+      document.getElementById("appointmentForm").reset(); // Reset form
+      document.getElementById("confirmationMessage").style.display = "block";
+    });
+  </script>
+
+  <script src="js1main.js"></script>
+</body>
+</html>

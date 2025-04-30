@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booked Appointments | Royal HealthCare</title>
+  <link rel="stylesheet" href="css1style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-hospital-symbol"></i> Royal HealthCare
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="doctors.html">Doctors</a></li>
+      <li><a href="health-packages.html">Health Packages</a></li>
+      <li><a href="appointment.html">Book Appointment</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="booked_appointments.html" class="active">Booked Appointments</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <img src="https://9db8c90074d93b0c2a87-3aa42a49af528d884ba88486e26453c0.ssl.cf2.rackcdn.com/header-checkappointments-logo.png">
+  <header class="hero">
+    <h1>Your Booked Appointments</h1>
+    <p>Review your appointment details here</p>
+  </header>
+
+  <!-- Booked Appointments Section -->
+  <section id="appointment-list" class="appointment-list">
+    <!-- Appointments will be dynamically loaded here -->
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Royal HealthCare Multispeciality Hospital</p>
+    <p>Emergency Helpline: <a href="tel:+911234567890">+91 12345 67890</a></p>
+  </footer>
+
+  <script>
+    // Load appointments from localStorage and display them
+    window.onload = function() {
+      const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+
+      const appointmentList = document.getElementById("appointment-list");
+
+      if (appointments.length > 0) {
+        appointments.forEach(function(appointment) {
+          const appointmentCard = document.createElement("div");
+          appointmentCard.classList.add("appointment-card");
+          appointmentCard.innerHTML = `
+            <h3>Patient Name: <span>${appointment.patientName}</span></h3>
+            <p><strong>Phone Number:</strong> ${appointment.phoneNumber}</p>
+            <p><strong>Doctor:</strong> ${appointment.doctorSelect}</p>
+            <p><strong>Date & Time:</strong> ${appointment.appointmentTime}</p>
+          `;
+          appointmentList.appendChild(appointmentCard);
+        });
+      } else {
+        appointmentList.innerHTML = "<p>No appointments booked yet.</p>";
+      }
+    };
+  </script>
+
+</body>
+</html>

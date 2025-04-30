@@ -1,0 +1,426 @@
+/* Preloader */
+#preloader {
+    background: white;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #002366;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #002366;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.navbar .logo {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    color: #FFD700;
+}
+
+/* Hero */
+.hero {
+    background: url('https://i.pinimg.com/736x/0d/21/9b/0d219b3bb1eaba925b1bcac0171b40b3.jpg') no-repeat center center/cover;
+    height: 90vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.hero h1 span {
+    color: #FFD700;
+}
+
+.hero .btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #FFD700;
+    color: #002366;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero .btn:hover {
+    background: #e6c200;
+    transform: scale(1.05);
+}
+
+/* About, Facilities, Doctors Section */
+.about, .facilities, .doctors {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+/* Facilities Cards */
+.facility-cards, .doctor-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.facility-cards .card, .doctor-cards .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.facility-cards .card:hover, .doctor-cards .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.facility-cards .card i, .doctor-cards .card img {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+/* Footer */
+.footer {
+    background: #002366;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 1rem;
+}
+
+/* Mission, Vision, Journey Section */
+.mission, .vision, .journey {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.mission h2, .vision h2, .journey h2 {
+    font-size: 2.2rem;
+    color: #002366;
+    margin-bottom: 1.5rem;
+}
+
+.mission p, .vision p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Timeline Section */
+.timeline {
+    margin-top: 2rem;
+}
+
+.timeline-item {
+    background: #f5f5f5;
+    padding: 1.5rem;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    transition: background 0.3s ease;
+}
+
+.timeline-item:hover {
+    background: #e6e6e6;
+}
+
+.timeline-item h3 {
+    color: #FFD700;
+    font-size: 1.5rem;
+}
+
+.timeline-item p {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+/* Doctors Section */
+.doctors {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.doctors h2 {
+    font-size: 2.2rem;
+    color: #002366;
+    margin-bottom: 1.5rem;
+}
+
+/* Doctor Cards */
+.doctor-cards .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.doctor-cards .card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 1rem;
+}
+
+.doctor-cards .card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Appointment Form Section */
+.appointment-form {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.appointment-form h2 {
+    font-size: 2.2rem;
+    color: #002366;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button.btn {
+    background-color: #FFD700;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #e6c200;
+    transform: scale(1.05);
+}
+
+button.btn:focus {
+    outline: 2px solid #002366;
+}
+
+/* Confirmation Message */
+.confirmation-message {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+/* Admin Login */
+.admin-login {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.admin-login h2 {
+    font-size: 2rem;
+    color: #002366;
+    margin-bottom: 1.5rem;
+}
+
+.admin-login .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.admin-login .form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.admin-login .form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.admin-login .btn {
+    background-color: #FFD700;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.admin-login .btn:hover {
+    background-color: #e6c200;
+    transform: scale(1.05);
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    padding: 4rem 2rem;
+}
+
+.admin-dashboard h2 {
+    font-size: 2rem;
+    color: #002366;
+    margin-bottom: 1.5rem;
+}
+
+.appointments, .doctors {
+    margin-top: 2rem;
+}
+
+.appointments h3, .doctors h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .facility-cards, .doctor-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar {
+        flex-direction: column;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+/* Hero Section */
+.hero {
+    background: url('../images/hospital-bg.jpg') no-repeat center center/cover;
+    height: 60vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+  }
+  
+  /* Navbar and Footer already exist in css1style.css */
+  
